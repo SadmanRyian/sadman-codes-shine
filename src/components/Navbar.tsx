@@ -46,7 +46,8 @@ export function Navbar() {
               <a
                 key={l.to + l.label}
                 href={l.hash ? `/#${l.hash}` : l.to}
-                className={`transition-colors hover:text-foreground ${
+                aria-current={isActive ? "page" : undefined}
+                className={`rounded-md transition-colors hover:text-foreground ${
                   isActive ? "text-foreground" : "text-muted-foreground"
                 }`}
               >

@@ -33,7 +33,7 @@ function Home() {
   return (
     <div className="min-h-screen">
       <Navbar />
-
+      <main id="main">
       {/* Hero */}
       <section className="relative pt-40 pb-28 overflow-hidden">
         <div className="absolute inset-0 grid-bg pointer-events-none" />
