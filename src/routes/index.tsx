@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Github, Mail, Brain, Code2, Network, Wrench, ShieldCheck } from "lucide-react";
+import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Section } from "@/components/Section";
@@ -36,21 +37,45 @@ function Home() {
       {/* Hero */}
       <section className="relative pt-40 pb-28 overflow-hidden">
         <div className="absolute inset-0 grid-bg pointer-events-none" />
-        <div className="relative mx-auto max-w-6xl px-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-3 py-1 text-xs font-mono">
+        <motion.div
+          className="relative mx-auto max-w-6xl px-6"
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+          }}
+        >
+          <motion.div
+            variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-3 py-1 text-xs font-mono"
+          >
             <span className="size-1.5 rounded-full bg-primary glow" />
             Available for internships & collaborations
-          </div>
-          <h1 className="mt-6 text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05]">
+          </motion.div>
+          <motion.h1
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05]"
+          >
             Sadman Ryian.
             <br />
             <span className="text-gradient">AI systems & secure web apps.</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">
+          </motion.h1>
+          <motion.p
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed"
+          >
             I'm a Computer Science engineer building <span className="text-foreground">intelligent, scalable, and secure software systems</span> — from explainable medical AI to opportunistic network frameworks.
-          </p>
+          </motion.p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-3">
+          <motion.div
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-10 flex flex-wrap items-center gap-3"
+          >
             <a
               href="#projects"
               className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:glow"
@@ -70,9 +95,13 @@ function Home() {
             >
               <Mail className="size-4" /> Contact
             </a>
-          </div>
+          </motion.div>
 
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+          <motion.div
+            variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border"
+          >
             {[
               { k: "Focus", v: "AI · Web · Security" },
               { k: "Projects", v: `${projects.length} shipped` },
@@ -84,9 +113,10 @@ function Home() {
                 <p className="mt-1.5 text-sm font-medium">{s.v}</p>
               </div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
+
 
       {/* About */}
       <Section id="about" eyebrow="01 / About" title="Engineering across the stack — and the model.">
@@ -157,7 +187,7 @@ function Home() {
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a href="mailto:sadmanriyanzisan@gmail.com" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:glow transition-all">
-                <Mail className="size-4" /> sadmanriyanzisan@gmail.com
+                <Mail className="size-4" />sadmanriyanzisan@gmail.com
               </a>
               <a href="https://github.com/sadmanryian" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium hover:border-foreground transition-colors">
                 <Github className="size-4" /> GitHub
