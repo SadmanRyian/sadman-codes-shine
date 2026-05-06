@@ -11,6 +11,7 @@ import {
 import appCss from "../styles.css?url";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BackgroundFX } from "@/components/BackgroundFX";
+import { MotionConfig } from "framer-motion";
 
 function NotFoundComponent() {
   return (
@@ -120,10 +121,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <BackgroundFX />
-        <Outlet />
-      </ThemeProvider>
+      <MotionConfig reducedMotion="user">
+        <ThemeProvider>
+          <BackgroundFX />
+          <Outlet />
+        </ThemeProvider>
+      </MotionConfig>
     </QueryClientProvider>
   );
 }

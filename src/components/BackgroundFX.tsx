@@ -1,10 +1,21 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 /**
  * Apple-style "liquid glass" background — slow drifting blurred gradient blobs
  * with subtle parallax. Sits behind all content (pointer-events: none).
+ * Respects prefers-reduced-motion: renders a static, simplified version.
  */
 export function BackgroundFX() {
+  const reduce = useReducedMotion();
+
+  const loop = (keyframes: Record<string, number[]>, duration: number, delay = 0) =>
+    reduce
+      ? { animate: undefined, transition: undefined }
+      : {
+          animate: keyframes,
+          transition: { duration, delay, repeat: Infinity, ease: "easeInOut" as const },
+        };
+
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Base wash */}
@@ -21,8 +32,7 @@ export function BackgroundFX() {
           background:
             "radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--primary) 55%, transparent), transparent 60%)",
         }}
-        animate={{ x: [0, 80, -40, 0], y: [0, 60, -30, 0], scale: [1, 1.1, 0.95, 1] }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        {...loop({ x: [0, 80, -40, 0], y: [0, 60, -30, 0], scale: [1, 1.1, 0.95, 1] }, 22)}
       />
       <motion.div
         aria-hidden
@@ -31,8 +41,7 @@ export function BackgroundFX() {
           background:
             "radial-gradient(circle at 70% 50%, color-mix(in oklab, var(--accent) 60%, transparent), transparent 65%)",
         }}
-        animate={{ x: [0, -60, 30, 0], y: [0, 40, -50, 0], scale: [1, 0.9, 1.05, 1] }}
-        transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
+        {...loop({ x: [0, -60, 30, 0], y: [0, 40, -50, 0], scale: [1, 0.9, 1.05, 1] }, 26)}
       />
       <motion.div
         aria-hidden
@@ -41,44 +50,44 @@ export function BackgroundFX() {
           background:
             "radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--primary-glow) 55%, transparent), transparent 60%)",
         }}
-        animate={{ x: [0, 40, -60, 0], y: [0, -40, 20, 0], scale: [1, 1.08, 0.92, 1] }}
-        transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+        {...loop({ x: [0, 40, -60, 0], y: [0, -40, 20, 0], scale: [1, 1.08, 0.92, 1] }, 30)}
       />
 
-      {/* Floating glass shards */}
-      {[
-        { top: "12%", left: "70%", size: 90, delay: 0, dur: 14 },
-        { top: "65%", left: "12%", size: 70, delay: 1.5, dur: 18 },
-        { top: "78%", left: "55%", size: 110, delay: 0.8, dur: 20 },
-        { top: "28%", left: "40%", size: 56, delay: 2.2, dur: 16 },
-      ].map((s, i) => (
-        <motion.div
-          key={i}
-          aria-hidden
-          className="absolute rounded-2xl border border-white/15 backdrop-blur-xl"
-          style={{
-            top: s.top,
-            left: s.left,
-            width: s.size,
-            height: s.size,
-            background:
-              "linear-gradient(135deg, color-mix(in oklab, var(--foreground) 8%, transparent), color-mix(in oklab, var(--primary) 10%, transparent))",
-            boxShadow:
-              "0 10px 40px -10px color-mix(in oklab, var(--primary) 25%, transparent), inset 0 1px 0 color-mix(in oklab, white 20%, transparent)",
-          }}
-          animate={{
-            y: [0, -30, 10, 0],
-            x: [0, 15, -10, 0],
-            rotate: [0, 8, -6, 0],
-          }}
-          transition={{
-            duration: s.dur,
-            delay: s.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
+      {/* Floating glass shards — hidden entirely under reduced motion to keep things calm */}
+      {!reduce &&
+        [
+          { top: "12%", left: "70%", size: 90, delay: 0, dur: 14 },
+          { top: "65%", left: "12%", size: 70, delay: 1.5, dur: 18 },
+          { top: "78%", left: "55%", size: 110, delay: 0.8, dur: 20 },
+          { top: "28%", left: "40%", size: 56, delay: 2.2, dur: 16 },
+        ].map((s, i) => (
+          <motion.div
+            key={i}
+            aria-hidden
+            className="absolute rounded-2xl border border-white/15 backdrop-blur-xl"
+            style={{
+              top: s.top,
+              left: s.left,
+              width: s.size,
+              height: s.size,
+              background:
+                "linear-gradient(135deg, color-mix(in oklab, var(--foreground) 8%, transparent), color-mix(in oklab, var(--primary) 10%, transparent))",
+              boxShadow:
+                "0 10px 40px -10px color-mix(in oklab, var(--primary) 25%, transparent), inset 0 1px 0 color-mix(in oklab, white 20%, transparent)",
+            }}
+            animate={{
+              y: [0, -30, 10, 0],
+              x: [0, 15, -10, 0],
+              rotate: [0, 8, -6, 0],
+            }}
+            transition={{
+              duration: s.dur,
+              delay: s.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
 
       {/* Grain overlay */}
       <div
