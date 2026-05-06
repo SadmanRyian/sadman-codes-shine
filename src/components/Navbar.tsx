@@ -1,5 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
 
 const links = [
   { to: "/", label: "Home" },
@@ -11,6 +13,7 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { location } = useRouterState();
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -50,13 +53,22 @@ export function Navbar() {
             );
           })}
         </nav>
-        <a
-          href="mailto:sadmanriyanzisan@gmail.com"
-          className="hidden sm:inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium hover:border-primary hover:text-primary transition-colors"
-        >
-          Let's talk
-          <span className="size-1.5 rounded-full bg-primary glow" />
-        </a>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={toggle}
+            aria-label="Toggle theme"
+            className="inline-flex items-center justify-center size-9 rounded-full border border-border bg-surface/60 backdrop-blur-md hover:border-primary hover:text-primary transition-colors"
+          >
+            {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          </button>
+          <a
+            href="mailto:sadmanriyanzisan@gmail.com"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium hover:border-primary hover:text-primary transition-colors"
+          >
+            Let's talk
+            <span className="size-1.5 rounded-full bg-primary glow" />
+          </a>
+        </div>
       </div>
     </header>
   );
