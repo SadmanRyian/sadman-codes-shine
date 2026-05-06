@@ -2,10 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Github, ExternalLink, Star } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { getProject, projects } from "@/data/projects";
+import { getProject, projects, type Project } from "@/data/projects";
 
 export const Route = createFileRoute("/projects/$projectId")({
-  loader: ({ params }) => {
+  loader: ({ params }): Project => {
     const project = getProject(params.projectId);
     if (!project) throw notFound();
     return project;
