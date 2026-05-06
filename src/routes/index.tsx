@@ -187,7 +187,7 @@ function Home() {
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a href="mailto:sadmanriyanzisan@gmail.com" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:glow transition-all">
-                <Mail className="size-4" /> sadmanriyanzisan@gmail.com
+                <Mail className="size-4" />sadmanriyanzisan@gmail.com
               </a>
               <a href="https://github.com/sadmanryian" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium hover:border-foreground transition-colors">
                 <Github className="size-4" /> GitHub
