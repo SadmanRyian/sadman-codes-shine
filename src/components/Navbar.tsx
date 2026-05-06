@@ -23,17 +23,19 @@ export function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "backdrop-blur-xl bg-background/70 border-b border-border"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="font-mono text-sm tracking-tight">
-          <span className="text-primary">~/</span>sadman.ryian
-        </Link>
+    <>
+      <a href="#main" className="skip-link">Skip to content</a>
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "backdrop-blur-xl bg-background/70 border-b border-border"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
+          <Link to="/" className="font-mono text-sm tracking-tight rounded-md">
+            <span className="text-primary">~/</span>sadman.ryian
+          </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm">
           {links.map((l) => {
             const isActive =
@@ -44,7 +46,8 @@ export function Navbar() {
               <a
                 key={l.to + l.label}
                 href={l.hash ? `/#${l.hash}` : l.to}
-                className={`transition-colors hover:text-foreground ${
+                aria-current={isActive ? "page" : undefined}
+                className={`rounded-md transition-colors hover:text-foreground ${
                   isActive ? "text-foreground" : "text-muted-foreground"
                 }`}
               >
@@ -70,6 +73,7 @@ export function Navbar() {
           </a>
         </div>
       </div>
-    </header>
+      </header>
+    </>
   );
 }

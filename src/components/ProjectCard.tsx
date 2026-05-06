@@ -17,13 +17,22 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="font-mono text-xs text-primary">{project.category} · {project.year}</p>
-          <h3 className="mt-2 text-2xl font-semibold tracking-tight">{project.title}</h3>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">
+            <Link
+              to="/projects/$projectId"
+              params={{ projectId: project.id }}
+              className="rounded-md outline-none hover:text-primary transition-colors"
+            >
+              {project.title}
+            </Link>
+          </h3>
           <p className="mt-1 text-sm text-muted-foreground">{project.tagline}</p>
         </div>
         <Link
           to="/projects/$projectId"
           params={{ projectId: project.id }}
-          aria-label={`View ${project.title}`}
+          aria-label={`View ${project.title} case study`}
+          tabIndex={-1}
           className="shrink-0 size-10 grid place-items-center rounded-full border border-border text-muted-foreground transition-all group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary"
         >
           <ArrowUpRight className="size-4 transition-transform group-hover:rotate-0 -rotate-45" />
@@ -54,7 +63,13 @@ export function ProjectCard({ project }: { project: Project }) {
           View case study →
         </Link>
         {project.github && (
-          <a href={project.github} target="_blank" rel="noreferrer" className="ml-auto text-muted-foreground hover:text-foreground transition-colors">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${project.title} on GitHub`}
+            className="ml-auto rounded-md p-1 text-muted-foreground hover:text-foreground transition-colors"
+          >
             <Github className="size-4" />
           </a>
         )}
