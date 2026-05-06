@@ -85,7 +85,7 @@ function ProjectDetail() {
           <div className="mt-12 aspect-[16/8] rounded-3xl border border-border bg-gradient-to-br from-surface to-surface-elevated overflow-hidden grid place-items-center relative">
             <div className="absolute inset-0 grid-bg opacity-60" />
             <p className="relative font-mono text-6xl md:text-8xl text-gradient font-bold">
-              {project.title.split(" ").map((w) => w[0]).join("").slice(0, 3)}
+              {project.title.split(" ").map((w: string) => w[0]).join("").slice(0, 3)}
             </p>
           </div>
 
@@ -98,7 +98,7 @@ function ProjectDetail() {
           <div>
             <SectionHeading>Tech Stack</SectionHeading>
             <div className="mt-4 flex flex-wrap gap-2">
-              {project.tech.map((t) => (
+              {project.tech.map((t: string) => (
                 <span key={t} className="rounded-md border border-border bg-surface px-3 py-1.5 font-mono text-xs">
                   {t}
                 </span>
