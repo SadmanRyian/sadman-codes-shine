@@ -46,7 +46,7 @@ function ProjectDetail() {
     <div className="min-h-screen">
       <Navbar />
 
-      <article className="pt-32 pb-16">
+      <article id="main" className="pt-32 pb-16">
         <div className="mx-auto max-w-4xl px-6">
           <Link to="/" hash="projects" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="size-4" /> All projects

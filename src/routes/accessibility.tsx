@@ -26,7 +26,7 @@ function AccessibilityPage() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className="mx-auto max-w-3xl px-6 pt-32 pb-24">
+      <main id="main" className="mx-auto max-w-3xl px-6 pt-32 pb-24">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
