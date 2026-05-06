@@ -102,14 +102,21 @@ function Home() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border"
           >
+            {[
+              { k: "Focus", v: "AI · Web · Security" },
+              { k: "Projects", v: `${projects.length} shipped` },
+              { k: "Stack", v: "Python · React · C++" },
+              { k: "Based in", v: "Dhaka, BD" },
+            ].map((s) => (
               <div key={s.k} className="bg-background p-5">
                 <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">{s.k}</p>
                 <p className="mt-1.5 text-sm font-medium">{s.v}</p>
               </div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
+
 
       {/* About */}
       <Section id="about" eyebrow="01 / About" title="Engineering across the stack — and the model.">
